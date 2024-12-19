@@ -11,7 +11,7 @@ const Card = chakra('div', {
     variant: {
       button: {
         '&:hover': {
-          backgroundColor: 'colorPalette.subtle',
+          backgroundColor: 'colorPalette.muted',
           cursor: 'pointer',
           transition: '0.2s',
         },
