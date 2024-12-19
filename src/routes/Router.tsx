@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AllRoutes from '@enums/AllRoutes';
-import Feed from '@pages/Feed';
+import Feed from '@pages/Feed/Feed';
 import Post from '@pages/Post';
 import UserProfile from '@pages/UserProfile';
 import UserPosts from '@pages/UserPosts';

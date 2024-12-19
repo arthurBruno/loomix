@@ -10,7 +10,7 @@ import Card from '@components/Card';
 import VerticalSeparator from '@components/VerticalSeparator';
 import ActionsButtons from './components/ActionsButtons';
 import AppLink from '@components/AppLink';
-import IPost from 'types/IPost';
+import IPost from 'types/posts/IPost';
 
 const PostCard = ({ id, title, body, createdAt, user }: IPost) => {
   const navigate = useNavigate();
