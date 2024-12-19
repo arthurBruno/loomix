@@ -7,19 +7,26 @@ import IReqPost from 'types/posts/IReqPost';
 
 const useUserProfile = () => {
   const { userId } = useParams();
-  const { allUsers, isUsersLoading } = useUsersContext();
+  const { loggedUser, allUsers, isUsersLoading } = useUsersContext();
 
   const { data: posts, isFetching: isPostsLoading } = useQuery({
     queryKey: ['posts'],
     queryFn: () => PostsService.getUserPosts(Number(userId)),
     enabled: !isUsersLoading,
-    select: ({ data }: AxiosResponse<IReqPost[]>) =>
+    select: ({ data }: AxiosResponse<IReqPost[]>) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      data.map(({ userId, ...rest }) => ({
+      const postsList = data.map(({ userId, ...rest }) => ({
         ...rest,
         createdAt: '17 de dezembro de 2024',
         user: allUsers[Number(userId)],
-      })),
+      }));
+
+      if (Number(userId) === loggedUser?.id) {
+        return PostsService.getLocalStoragePosts().concat(postsList);
+      }
+
+      return postsList;
+    },
   });
 
   return {

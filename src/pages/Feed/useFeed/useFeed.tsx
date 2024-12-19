@@ -7,21 +7,28 @@ import IReqPost from 'types/posts/IReqPost';
 const useFeed = () => {
   const { allUsers, isUsersLoading } = useUsersContext();
 
-  const { data: posts, isFetching: isPostsLoading } = useQuery({
+  const {
+    data: posts,
+    isFetching: isPostsLoading,
+    refetch: refetchPosts,
+  } = useQuery({
     queryKey: ['posts'],
     queryFn: PostsService.getList,
     enabled: !isUsersLoading,
     select: ({ data }: AxiosResponse<IReqPost[]>) =>
-      data.map(({ userId, ...rest }) => ({
-        ...rest,
-        createdAt: '17 de dezembro de 2024',
-        user: allUsers[userId],
-      })),
+      PostsService.getLocalStoragePosts().concat(
+        data.map(({ userId, ...rest }) => ({
+          ...rest,
+          createdAt: '17 de dezembro de 2024',
+          user: allUsers[userId],
+        })),
+      ),
   });
 
   return {
     posts,
     isPostsLoading,
+    refetchPosts,
   };
 };
 

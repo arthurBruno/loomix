@@ -1,3 +1,4 @@
+import IPost from 'types/posts/IPost';
 import JsonPlaceholderClient from './JsonPlaceholderClient';
 
 const PostsService = {
@@ -11,6 +12,16 @@ const PostsService = {
         postId,
       },
     }),
+  createPost: (post: IPost) =>
+    new Promise((resolve) => {
+      const newPosts = JSON.parse(localStorage.getItem('newPosts') || '[]');
+      newPosts.unshift(post);
+      localStorage.setItem('newPosts', JSON.stringify(newPosts));
+
+      resolve('Post created!');
+    }),
+  getLocalStoragePosts: () =>
+    JSON.parse(localStorage.getItem('newPosts') || '[]'),
 };
 
 export default PostsService;
