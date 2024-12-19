@@ -5,12 +5,12 @@ import useUsersContext from 'contexts/UsersContext/UsersContext';
 import IReqPost from 'types/posts/IReqPost';
 
 const useFeed = () => {
-  const { allUsers, isAllUsersLoading } = useUsersContext();
+  const { allUsers, isUsersLoading } = useUsersContext();
 
   const { data: posts, isFetching: isPostsLoading } = useQuery({
     queryKey: ['posts'],
     queryFn: PostsService.get,
-    enabled: !isAllUsersLoading,
+    enabled: !isUsersLoading,
     select: ({ data }: AxiosResponse<IReqPost[]>) =>
       data.map(({ userId, ...rest }) => ({
         ...rest,

@@ -1,25 +1,55 @@
-import { Button, Grid, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Grid,
+  HStack,
+  Skeleton,
+  Spinner,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { IoLogOutOutline } from 'react-icons/io5';
 import Avatar from '@components/Avatar';
 import AppLink from '@components/AppLink';
+import useUsersContext from 'contexts/UsersContext/UsersContext';
+import Loading from '@components/Loading';
 
-const UserData = () => (
-  <Grid
-    gridTemplateColumns="max-content auto min-content"
-    alignItems="center"
-    gap="0.5rem"
-  >
-    <Avatar src="https://picsum.photos/200" alt="Avatar do usuário" />
+const UserData = () => {
+  const { loggedUser, isUsersLoading } = useUsersContext();
+  const isLoading = isUsersLoading || !loggedUser;
 
-    <Grid fontSize="small">
-      <AppLink href="/perfil/1">João Silva Costa</AppLink>
-      <Text>@joao_silva</Text>
+  return (
+    <Grid
+      gridTemplateColumns="max-content auto min-content"
+      alignItems="center"
+      gap="0.5rem"
+    >
+      {isLoading ? (
+        <>
+          <div />
+          <Loading size="md" />
+        </>
+      ) : (
+        <>
+          <Avatar
+            src={loggedUser.photo}
+            alt={`Avatar do usuário ${loggedUser.name}`}
+          />
+
+          <Grid fontSize="small">
+            <AppLink href={`/perfil/${loggedUser.id}`}>
+              {loggedUser.name}
+            </AppLink>
+
+            <Text>@{loggedUser.nickname}</Text>
+          </Grid>
+        </>
+      )}
+
+      <Button variant="ghost" padding="0">
+        <IoLogOutOutline />
+      </Button>
     </Grid>
-
-    <Button variant="ghost" padding="0">
-      <IoLogOutOutline />
-    </Button>
-  </Grid>
-);
+  );
+};
 
 export default UserData;

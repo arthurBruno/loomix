@@ -1,8 +1,14 @@
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center, ConditionalValue, Spinner } from '@chakra-ui/react';
 
-const Loading = () => (
+interface ILoadingProps {
+  size?: ConditionalValue<
+    'sm' | 'md' | 'lg' | 'xl' | 'xs' | 'inherit' | undefined
+  >;
+}
+
+const Loading = ({ size = 'lg' }: ILoadingProps) => (
   <Center h="100px">
-    <Spinner size="lg" />
+    <Spinner size={size} />
   </Center>
 );
 

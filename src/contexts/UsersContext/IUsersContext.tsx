@@ -4,13 +4,13 @@ import TAllUsers from 'types/users/TAllUsers';
 interface IUsersContext {
   loggedUser?: IUser;
   allUsers: TAllUsers;
-  isAllUsersLoading: boolean;
+  isUsersLoading: boolean;
 }
 
 export const UsersContextDefaultValues = {
   loggedUser: undefined,
   allUsers: {},
-  isAllUsersLoading: true,
+  isUsersLoading: true,
 };
 
 export default IUsersContext;

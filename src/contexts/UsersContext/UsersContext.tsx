@@ -15,7 +15,7 @@ interface IUsersProviderProps {
 }
 
 export const UsersProvider = ({ children }: IUsersProviderProps) => {
-  const { data: allUsers, isFetching: isAllUsersLoading } = useQuery({
+  const { data: allUsers, isFetching: isUsersLoading } = useQuery({
     queryKey: ['users'],
     queryFn: UsersService.get,
     select: ({ data }: AxiosResponse<IReqUser[]>) => {
@@ -32,9 +32,9 @@ export const UsersProvider = ({ children }: IUsersProviderProps) => {
           ? Object.values(allUsers)[0]
           : undefined,
       allUsers: allUsers ?? {},
-      isAllUsersLoading,
+      isUsersLoading,
     }),
-    [isAllUsersLoading],
+    [isUsersLoading],
   );
 
   return (
