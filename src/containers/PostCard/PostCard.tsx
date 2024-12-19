@@ -31,11 +31,7 @@ const PostCard = ({
 
   return (
     <Grid>
-      <Card
-        variant={!showComments ? 'button' : undefined}
-        onClick={handleNavigateToPost}
-        padding="0.75rem"
-      >
+      <Card variant={!showComments ? 'button' : undefined} padding="0.75rem">
         <Flex justifyContent="space-between">
           <Flex align="center" gap="0.5rem">
             <AppLink href={`/perfil/${user.id}`} fontWeight="normal">
@@ -53,23 +49,25 @@ const PostCard = ({
           <ActionsButtons />
         </Flex>
 
-        <Text mt="0.75rem">{title}</Text>
+        <Grid onClick={handleNavigateToPost}>
+          <Text mt="0.75rem">{title}</Text>
 
-        <Text mt="0.75rem">{body}</Text>
+          <Text mt="0.75rem">{body}</Text>
 
-        <Flex justifyContent="end">
-          <Button variant="ghost" padding="0">
-            <IoHeartOutline />
-          </Button>
+          <Flex justifyContent="end">
+            <Button variant="ghost" padding="0">
+              <IoHeartOutline />
+            </Button>
 
-          <Button variant="ghost" padding="0" onClick={handleNavigateToPost}>
-            <IoChatboxOutline />
-          </Button>
+            <Button variant="ghost" padding="0" onClick={handleNavigateToPost}>
+              <IoChatboxOutline />
+            </Button>
 
-          <Button variant="ghost" padding="0">
-            <IoBookmarkOutline />
-          </Button>
-        </Flex>
+            <Button variant="ghost" padding="0">
+              <IoBookmarkOutline />
+            </Button>
+          </Flex>
+        </Grid>
       </Card>
 
       {showComments ? <Comments postId={id} /> : null}
