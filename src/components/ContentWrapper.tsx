@@ -8,7 +8,7 @@ const ContentWrapper = () => (
     <Grid
       gridTemplateColumns={{
         sm: '0 min-content auto 0 0',
-        md: '5% 20% 50% 20% 5%',
+        md: 'calc(5% - 2.5rem) 20% 50% 20% calc(5% - 2.5rem)',
       }}
       marginTop={{
         sm: '0.25rem',
