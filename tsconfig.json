@@ -9,7 +9,8 @@
       "@enums/*": ["./enums/*"],
       "@pages/*": ["./pages/*"],
       "@routes/*": ["./routes/*"],
-      "@services/*": ["./services/*"]
+      "@services/*": ["./services/*"],
+      "@utils/*": ["./utils/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
