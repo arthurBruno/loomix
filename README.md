@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+Node Version: v22.12
+
+## Available Scripts
+
 In the project directory, you can run:
 
 ### `yarn start`
