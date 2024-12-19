@@ -12,6 +12,7 @@ import ActionsButtons from './components/ActionsButtons/ActionsButtons';
 import AppLink from '@components/AppLink';
 import IPost from 'types/posts/IPost';
 import Comments from './components/Comments/Comments';
+import useUsersContext from 'contexts/UsersContext/UsersContext';
 
 interface IPostCardProps extends IPost {
   showComments?: boolean;
@@ -25,6 +26,7 @@ const PostCard = ({
   user,
   showComments = false,
 }: IPostCardProps) => {
+  const { loggedUser } = useUsersContext();
   const navigate = useNavigate();
   const handleNavigateToPost = () =>
     !showComments ? navigate(`/post/${id}`) : null;
@@ -36,7 +38,7 @@ const PostCard = ({
           <Flex align="center" gap="0.5rem">
             <AppLink href={`/perfil/${user.id}`} fontWeight="normal">
               <Avatar src={user.photo} alt="Logo Loomix" />
-              {user.nickname}
+              <Text textTransform="lowercase">@{user.nickname}</Text>
             </AppLink>
 
             <VerticalSeparator />
@@ -46,7 +48,7 @@ const PostCard = ({
             </Text>
           </Flex>
 
-          <ActionsButtons />
+          {loggedUser && loggedUser.id === user.id ? <ActionsButtons /> : null}
         </Flex>
 
         <Grid onClick={handleNavigateToPost}>

@@ -1,12 +1,4 @@
-import {
-  Button,
-  Grid,
-  HStack,
-  Skeleton,
-  Spinner,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Grid, Text } from '@chakra-ui/react';
 import { IoLogOutOutline } from 'react-icons/io5';
 import Avatar from '@components/Avatar';
 import AppLink from '@components/AppLink';
@@ -40,7 +32,7 @@ const UserData = () => {
               {loggedUser.name}
             </AppLink>
 
-            <Text>@{loggedUser.nickname}</Text>
+            <Text textTransform="lowercase">@{loggedUser.nickname}</Text>
           </Grid>
         </>
       )}
