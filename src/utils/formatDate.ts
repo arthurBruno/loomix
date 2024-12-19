@@ -5,7 +5,7 @@ const formatDate = (date: Date) => {
     year: 'numeric',
   });
 
-  return formatter.format(date).replace(/ de /g, ' de');
+  return formatter.format(date);
 };
 
 export default formatDate;

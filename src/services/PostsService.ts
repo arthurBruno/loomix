@@ -12,6 +12,8 @@ const PostsService = {
         postId,
       },
     }),
+  getLocalStoragePosts: () =>
+    JSON.parse(localStorage.getItem('newPosts') || '[]'),
   createPost: (post: IPost) =>
     new Promise((resolve) => {
       const newPosts = JSON.parse(localStorage.getItem('newPosts') || '[]');
@@ -20,8 +22,34 @@ const PostsService = {
 
       resolve('Post created!');
     }),
-  getLocalStoragePosts: () =>
-    JSON.parse(localStorage.getItem('newPosts') || '[]'),
+  editPost: (editedPost: IPost) =>
+    new Promise((resolve) => {
+      const newPosts = JSON.parse(localStorage.getItem('newPosts') || '[]');
+
+      localStorage.setItem(
+        'newPosts',
+        JSON.stringify(
+          newPosts.map((post: IPost) =>
+            post.id === editedPost.id
+              ? { ...post, body: editedPost.body }
+              : post,
+          ),
+        ),
+      );
+
+      resolve('Post deleted!');
+    }),
+  deletePost: (postId: number) =>
+    new Promise((resolve) => {
+      const newPosts = JSON.parse(localStorage.getItem('newPosts') || '[]');
+
+      localStorage.setItem(
+        'newPosts',
+        JSON.stringify(newPosts.filter((post: IPost) => post.id !== postId)),
+      );
+
+      resolve('Post deleted!');
+    }),
 };
 
 export default PostsService;

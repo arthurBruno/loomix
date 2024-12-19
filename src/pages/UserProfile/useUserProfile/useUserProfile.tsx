@@ -9,7 +9,11 @@ const useUserProfile = () => {
   const { userId } = useParams();
   const { loggedUser, allUsers, isUsersLoading } = useUsersContext();
 
-  const { data: posts, isFetching: isPostsLoading } = useQuery({
+  const {
+    data: posts,
+    isFetching: isPostsLoading,
+    refetch: refetchPosts,
+  } = useQuery({
     queryKey: ['posts'],
     queryFn: () => PostsService.getUserPosts(Number(userId)),
     enabled: !isUsersLoading,
@@ -32,6 +36,7 @@ const useUserProfile = () => {
   return {
     posts,
     isPostsLoading,
+    refetchPosts,
   };
 };
 
