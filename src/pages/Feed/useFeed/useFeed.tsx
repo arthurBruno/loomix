@@ -9,7 +9,7 @@ const useFeed = () => {
 
   const { data: posts, isFetching: isPostsLoading } = useQuery({
     queryKey: ['posts'],
-    queryFn: PostsService.get,
+    queryFn: PostsService.getList,
     enabled: !isUsersLoading,
     select: ({ data }: AxiosResponse<IReqPost[]>) =>
       data.map(({ userId, ...rest }) => ({
